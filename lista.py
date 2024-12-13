@@ -6,10 +6,9 @@ class Lista:
         self.lista = []
         self.carregar_lista()
 
-    # Carregar itens existentes do banco de dados
     def carregar_lista(self):
         query = "SELECT id, conteudo, estado FROM lista"
-        resultados = select_query(query)  # Função que executa o SELECT no banco
+        resultados = select_query(query)
         if resultados:
             for id, conteudo, estado in resultados:
                 item = Item(id, conteudo, estado)
@@ -19,10 +18,7 @@ class Lista:
         if self.lista.__len__() != 0:
             i = 1
             for l in self.lista:
-                if l.estado:
-                    print(f"{i} [X] - {l.conteudo}")
-                elif not l.estado:
-                    print(f"{i} [ ] - {l.conteudo}")
+                print(f"{i} - {l.__str__()}")
                 i+=1
         else:
             print("")
@@ -49,15 +45,12 @@ class Lista:
         params = (conteudo, False)
         insert_query(query, params)
 
-    # Remover item da lista e do banco de dados
     def remove_lista(self, index_remove):
         if 0 < index_remove <= len(self.lista):
             item_id = self.lista[index_remove - 1].id
 
-            # Remover o item da lista
             self.lista.pop(index_remove - 1)
 
-            # Remover do banco de dados
             query = "DELETE FROM lista WHERE id = %s"
             params = (item_id,)
             delete_query(query, params)

@@ -5,5 +5,9 @@ class Item:
         self.estado = estado
 
     def __str__(self):
-        estado_str = "Ativo" if self.estado else "Inativo"
-        return f"Item(ID: {self.id}, Conteúdo: '{self.conteudo}', Estado: {estado_str})"
+        estado_str = "[X]" if self.estado else "[ ]"
+
+        return f"{estado_str} {self.conteudo}"
+
+    def get_id(self):
+        return "id: ", self.id

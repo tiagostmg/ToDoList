@@ -1,6 +1,5 @@
 import mysql.connector
 
-# Configuração de conexão com o banco de dados
 db_config = {
     "host": "localhost",
     "port": 3306,
@@ -9,7 +8,6 @@ db_config = {
     "database": "lista"
 }
 
-# Conexão com o banco de dados
 def connect_db():
     try:
         conexao = mysql.connector.connect(**db_config)
@@ -18,7 +16,6 @@ def connect_db():
         print(f"Erro ao conectar ao banco de dados: {error}")
         return None
 
-# Função SELECT
 def select_query(query, params=None):
     conexao = connect_db()
     if conexao:
@@ -33,7 +30,6 @@ def select_query(query, params=None):
             cursor.close()
             conexao.close()
 
-# Função INSERT
 def insert_query(query, params):
     conexao = connect_db()
     if conexao:
@@ -48,7 +44,6 @@ def insert_query(query, params):
             cursor.close()
             conexao.close()
 
-# Função UPDATE
 def update_query(query, params):
     conexao = connect_db()
     if conexao:
@@ -62,7 +57,7 @@ def update_query(query, params):
         finally:
             cursor.close()
             conexao.close()
-# Função DELETE
+
 def delete_query(query, params):
     conexao = connect_db()
     if conexao:

@@ -24,8 +24,8 @@ while True:
             lista.add_lista(inputAdd)
         case "2":
             try:
-                inputRemove = int(input("Digite o ID do item a ser deletado: "))
-                lista.remove_lista(inputRemove)
+                input_remove = int(input("Digite o ID do item a ser deletado: "))
+                lista.remove_lista(input_remove)
             except ValueError:
                 print("ID inválido. Por favor, insira um número.")
         case "3":
