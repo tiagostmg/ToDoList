@@ -16,7 +16,7 @@ def connect_db():
         print(f"Erro ao conectar ao banco de dados: {error}")
         return None
 
-def select_query(query, params=None):
+def select(query, params=None):
     conexao = connect_db()
     if conexao:
         try:
@@ -30,7 +30,7 @@ def select_query(query, params=None):
             cursor.close()
             conexao.close()
 
-def insert_query(query, params):
+def insert(query, params):
     conexao = connect_db()
     if conexao:
         try:
@@ -44,7 +44,7 @@ def insert_query(query, params):
             cursor.close()
             conexao.close()
 
-def update_query(query, params):
+def update(query, params):
     conexao = connect_db()
     if conexao:
         try:
@@ -58,7 +58,7 @@ def update_query(query, params):
             cursor.close()
             conexao.close()
 
-def delete_query(query, params):
+def delete(query, params):
     conexao = connect_db()
     if conexao:
         try:

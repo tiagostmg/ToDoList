@@ -8,7 +8,7 @@ class Lista:
 
     def carregar_lista(self):
         query = "SELECT id, conteudo, estado FROM lista"
-        resultados = select_query(query)
+        resultados = select(query)
         if resultados:
             for id, conteudo, estado in resultados:
                 item = Item(id, conteudo, estado)
@@ -31,19 +31,24 @@ class Lista:
 
             query = "UPDATE lista SET estado = %s WHERE id = %s"
             params = (item.estado, item.id)
-            update_query(query, params)
+            update(query, params)
 
         else:
             print("Índice inválido. Nenhum item foi alterado.")
 
     def add_lista(self, conteudo):
-        novo_item = Item(None, conteudo, False)
-        self.lista.append(novo_item)
-
-        # Inserir no banco de dados
-        query = "INSERT INTO lista (conteudo, estado) VALUES (%s, %s)"
+        insert_query = "INSERT INTO lista (conteudo, estado) VALUES (%s, %s)"
         params = (conteudo, False)
-        insert_query(query, params)
+        insert(insert_query, params)
+
+        last_id_query = "SELECT LAST_INSERT_ID()"
+        result = select(last_id_query)
+
+        if result:
+            item_id = result[0][0]
+            novo_item = Item(item_id, conteudo, False)
+            self.lista.append(novo_item)
+
 
     def remove_lista(self, index_remove):
         if 0 < index_remove <= len(self.lista):
@@ -53,7 +58,7 @@ class Lista:
 
             query = "DELETE FROM lista WHERE id = %s"
             params = (item_id,)
-            delete_query(query, params)
+            delete(query, params)
 
         else:
             print("Índice inválido. Nenhum item foi removido.")
