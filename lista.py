@@ -2,6 +2,7 @@ from item import Item
 from sqlConnection import *
 
 class Lista:
+
     def __init__(self):
         self.lista = []
         self.carregar_lista()
@@ -24,7 +25,10 @@ class Lista:
             print("")
 
     def trocar_estado(self, index_troca):
+
+        index_troca = int(index_troca)
         if 0 < index_troca <= len(self.lista):
+
             item = self.lista[index_troca - 1]
 
             item.estado = not item.estado
@@ -49,7 +53,6 @@ class Lista:
             novo_item = Item(item_id, conteudo, False)
             self.lista.append(novo_item)
 
-
     def remove_lista(self, index_remove):
         if 0 < index_remove <= len(self.lista):
             item_id = self.lista[index_remove - 1].id
@@ -62,3 +65,18 @@ class Lista:
 
         else:
             print("Índice inválido. Nenhum item foi removido.")
+
+    def edit(self, index_edit, text_edit):
+        index_edit = int(index_edit)
+        if 0 < index_edit <= len(self.lista):
+
+            item = self.lista[index_edit - 1]
+
+            item.conteudo = text_edit
+
+            query = "UPDATE lista SET conteudo = %s WHERE id = %s"
+            params = (item.conteudo, item.id)
+            update(query, params)
+
+        else:
+            print("Índice inválido. Nenhum item foi alterado.")
