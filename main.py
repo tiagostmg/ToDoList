@@ -5,7 +5,8 @@ lista = Lista()
 while True:
     print("To-do List")
     print("----------")
-    lista.mostra_lista()
+    for item in lista.mostra_lista():
+        print(item)
     print("----------")
 
     print("1 - Adicionar item")

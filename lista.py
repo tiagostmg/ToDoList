@@ -16,13 +16,10 @@ class Lista:
                 self.lista.append(item)
 
     def mostra_lista(self):
-        if self.lista.__len__() != 0:
-            i = 1
-            for l in self.lista:
-                print(f"{i} - {l.__str__()}")
-                i+=1
+        if len(self.lista) != 0:
+            return [f"{i} - {str(item)}" for i, item in enumerate(self.lista, start=1)]
         else:
-            print("")
+            return []
 
     def trocar_estado(self, index_troca):
 
